@@ -17,14 +17,18 @@ class EventController {
     let events: [EventsData] = []
     
     //MARK: - String Constants
-    static let baseURL = URL(string: "https://api.seatgeek.com/2/events?")
+    static let baseURL = URL(string: "https://api.seatgeek.com/2/")
     static let client_id = "&client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
+//    static let performers = "performers"
+//    static let venues = "venues"
+    static let event = "event?"
+    static let query = "q="
     static let imageURL = "https://seatgeek.com/images/performers-landscape/"
-    
-    static func fetchEvents(searchTerm: String, completion: @escaping (Result<[EventsData], EventError>) -> Void) {
+    //searchTerm: String, ** insert below after tests*8
+    static func fetchEvents(completion: @escaping (Result<[EventsData], EventError>) -> Void) {
         
         //Construct URL
-        let baseURLL = URL(string: "https://api.seatgeek.com/2/events?performers.slug=new-york-mets&client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy")
+        let baseURLL = URL(string: "https://api.seatgeek.com/2/events/801255?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy")
         
         guard let finalURL = baseURLL else {return completion(.failure(.invalidURL))}
         print("Final URL: \(finalURL)")

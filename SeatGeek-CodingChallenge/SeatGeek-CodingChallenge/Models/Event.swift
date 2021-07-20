@@ -27,6 +27,7 @@ struct EventTopLevelObject: Codable {
 struct EventsData: Codable {
     let title: String
     let date_tbd: Bool
+    let datetime_utc: String
     let venue: Venue
     let performers: [Performers]
 }
@@ -38,12 +39,12 @@ struct Venue: Codable {
 }
 struct Performers: Codable {
     let image: String
-    let images: ThirdTopLevelObject
+//    let images: ThirdTopLevelObject
 }
-
-struct ThirdTopLevelObject: Codable {
-    let huge: String
-}
+//
+//struct ThirdTopLevelObject: Codable {
+//    let huge: String
+//}
 
 
 

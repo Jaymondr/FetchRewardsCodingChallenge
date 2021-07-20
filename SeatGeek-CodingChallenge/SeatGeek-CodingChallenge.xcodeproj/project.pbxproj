@@ -13,11 +13,11 @@
 		67C9F9E926A62817009140E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67C9F9E826A62817009140E8 /* Assets.xcassets */; };
 		67C9F9EC26A62817009140E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67C9F9EA26A62817009140E8 /* LaunchScreen.storyboard */; };
 		67C9F9FD26A62C2D009140E8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9F9FC26A62C2D009140E8 /* Event.swift */; };
-		67C9FA0026A64441009140E8 /* SeatGeekEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9F9FF26A64441009140E8 /* SeatGeekEndpoint.swift */; };
 		67C9FA0226A64684009140E8 /* EventListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0126A64684009140E8 /* EventListTableViewController.swift */; };
 		67C9FA0426A646C0009140E8 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0326A646C0009140E8 /* EventTableViewCell.swift */; };
 		67C9FA0626A65182009140E8 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0526A65182009140E8 /* EventController.swift */; };
 		67C9FA0926A65389009140E8 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0826A65389009140E8 /* EventError.swift */; };
+		67D89F8026A73DAE0001B3E3 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +29,11 @@
 		67C9F9EB26A62817009140E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67C9F9ED26A62817009140E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67C9F9FC26A62C2D009140E8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		67C9F9FF26A64441009140E8 /* SeatGeekEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatGeekEndpoint.swift; sourceTree = "<group>"; };
 		67C9FA0126A64684009140E8 /* EventListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListTableViewController.swift; sourceTree = "<group>"; };
 		67C9FA0326A646C0009140E8 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		67C9FA0526A65182009140E8 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		67C9FA0826A65389009140E8 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
+		67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,9 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				67C9F9F426A628A0009140E8 /* Models */,
-				67C9F9FE26A64415009140E8 /* Services */,
-				67C9F9F526A628B2009140E8 /* Views */,
 				67C9F9F626A628BC009140E8 /* Controllers */,
+				67C9F9F526A628B2009140E8 /* Views */,
 				67C9F9F326A62895009140E8 /* Resources */,
 			);
 			path = "SeatGeek-CodingChallenge";
@@ -125,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				67C9FA0126A64684009140E8 /* EventListTableViewController.swift */,
+				67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -144,14 +144,6 @@
 				67C9FA0326A646C0009140E8 /* EventTableViewCell.swift */,
 			);
 			path = CustomCells;
-			sourceTree = "<group>";
-		};
-		67C9F9FE26A64415009140E8 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				67C9F9FF26A64441009140E8 /* SeatGeekEndpoint.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		67C9FA0726A6536C009140E8 /* Helper and Extension */ = {
@@ -238,7 +230,7 @@
 				67C9F9FD26A62C2D009140E8 /* Event.swift in Sources */,
 				67C9F9E226A62816009140E8 /* SceneDelegate.swift in Sources */,
 				67C9FA0626A65182009140E8 /* EventController.swift in Sources */,
-				67C9FA0026A64441009140E8 /* SeatGeekEndpoint.swift in Sources */,
+				67D89F8026A73DAE0001B3E3 /* EventDetailViewController.swift in Sources */,
 				67C9FA0926A65389009140E8 /* EventError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,11 +9,10 @@ import UIKit
 
 class EventTableViewCell: UITableViewCell {
     //MARK: - Outlets
-    
-    
-    
-    
-    
+    @IBOutlet weak var eventTitleLable: UILabel!
+    @IBOutlet weak var eventVenueLabel: UILabel!
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventImageView: UIImageView!
     
     //MARK: - Properties
     var event: EventsData? {
@@ -25,7 +24,7 @@ class EventTableViewCell: UITableViewCell {
     //MARK: - Functions
     
     func updateViews() {
-        guard let event = event else {return}
+//        guard let event = event else {return}
         
     }
     

@@ -8,9 +8,6 @@
 import UIKit
 
 class EventListTableViewController: UITableViewController {
-    //MARK: - Outlets
-    
-    
     //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +18,13 @@ class EventListTableViewController: UITableViewController {
     }
     //MARK: - Properties
     var events: [EventsData] = []
-    
+    var event: EventsData?
+
     
     //MARK: - Functions
+    //searchTerm: String() insert after testing
     func updateTableView() {
-        EventController.fetchEvents(searchTerm: String()) { (result) in //JWR searchTerm string?
+        EventController.fetchEvents() { (result) in //JWR searchTerm string?
             DispatchQueue.main.async {
                 switch result {
                 case .success(let events):
@@ -53,8 +52,6 @@ class EventListTableViewController: UITableViewController {
         
         let event = events[indexPath.row]
         cell?.event = event
-        
-        
         
         return cell ?? EventTableViewCell()
     }
