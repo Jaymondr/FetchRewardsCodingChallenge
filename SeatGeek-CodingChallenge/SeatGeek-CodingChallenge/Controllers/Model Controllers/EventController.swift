@@ -12,12 +12,16 @@ import UIKit
 
 class EventController {
     
+    static let shared = EventController()
+    
+    let events: [EventsData] = []
+    
     //MARK: - String Constants
     static let baseURL = URL(string: "https://api.seatgeek.com/2/events?")
     static let client_id = "&client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
     static let imageURL = "https://seatgeek.com/images/performers-landscape/"
     
-    static func fetchEvents(completion: @escaping (Result<[EventsData], EventError>) -> Void) {
+    static func fetchEvents(searchTerm: String, completion: @escaping (Result<[EventsData], EventError>) -> Void) {
         
         //Construct URL
         let baseURLL = URL(string: "https://api.seatgeek.com/2/events?performers.slug=new-york-mets&client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy")

@@ -8,16 +8,28 @@
 import UIKit
 
 class EventTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    //MARK: - Outlets
+    
+    
+    
+    
+    
+    
+    //MARK: - Properties
+    var event: EventsData? {
+        didSet {
+            updateViews()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    //MARK: - Functions
+    
+    func updateViews() {
+        guard let event = event else {return}
+        
     }
-
-}
+    
+    
+    
+    
+}//End of class
