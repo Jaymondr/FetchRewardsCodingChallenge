@@ -24,11 +24,14 @@ class EventTableViewCell: UITableViewCell {
     //MARK: - Functions
     
     func updateViews() {
-//        guard let event = event else {return}
+        guard let event = event else {return}
+        eventTitleLable.text = event.title
+        eventVenueLabel.text = event.venue.name
+        eventDateLabel.text = event.date
+        
+        
+        
+        
         
     }
-    
-    
-    
-    
 }//End of class

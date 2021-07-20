@@ -28,7 +28,7 @@ class EventController {
     static func fetchEvents(completion: @escaping (Result<[EventsData], EventError>) -> Void) {
         
         //Construct URL
-        let baseURLL = URL(string: "https://api.seatgeek.com/2/events/801255?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy")
+        let baseURLL = URL(string: "https://api.seatgeek.com/2/events?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy&q=football")
         
         guard let finalURL = baseURLL else {return completion(.failure(.invalidURL))}
         print("Final URL: \(finalURL)")
@@ -51,23 +51,23 @@ class EventController {
             do {
                 let eventTopLevelObject = try JSONDecoder().decode(EventTopLevelObject.self, from: data)
                 
-                var arrayOfEvent: [EventsData] = []
+//                var arrayOfEvent = events
                 
                 for eventData in eventTopLevelObject.events {
                     
-                    arrayOfEvent.append(eventData)
+//                    self.events.append(eventData)
                     print(eventData.title)
                     
                     for performer in eventData.performers {
                         print(performer.image)
                     }
                 }
-                completion(.success(arrayOfEvent))
+                completion(.success(eventTopLevelObject.events))
         
             } catch {
                 completion(.failure(.thrownError(error)))
             }
-            
+
         }.resume()
     }
 }

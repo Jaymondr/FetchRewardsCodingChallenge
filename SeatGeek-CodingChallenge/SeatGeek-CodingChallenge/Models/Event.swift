@@ -26,25 +26,34 @@ struct EventTopLevelObject: Codable {
 
 struct EventsData: Codable {
     let title: String
-    let date_tbd: Bool
-    let datetime_utc: String
+    let dateTBD: Bool
+    let date: String
     let venue: Venue
     let performers: [Performers]
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case dateTBD = "date_tbd"
+        case date = "datetime_utc"
+        case venue = "venue"
+        case performers = "performers"
+    }
 }
 
 struct Venue: Codable {
     let name: String
     let address: String
-    let display_location: String
+    let location: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case address = "address"
+        case location = "display_location"
+    }
 }
 struct Performers: Codable {
     let image: String
-//    let images: ThirdTopLevelObject
 }
-//
-//struct ThirdTopLevelObject: Codable {
-//    let huge: String
-//}
 
 
 
