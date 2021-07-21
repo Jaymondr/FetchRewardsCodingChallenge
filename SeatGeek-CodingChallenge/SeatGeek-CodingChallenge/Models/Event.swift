@@ -44,15 +44,17 @@ struct Venue: Codable {
     let name: String
     let address: String
     let location: String
+    let url: URL
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case address = "address"
         case location = "display_location"
+        case url = "url"
     }
 }
 struct Performers: Codable {
-    let image: String
+    let image: URL?
 }
 
 

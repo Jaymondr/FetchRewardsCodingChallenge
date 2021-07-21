@@ -20,17 +20,22 @@ class EventTableViewCell: UITableViewCell {
             updateViews()
         }
     }
+    
+    var performer: Performers?
 
     //MARK: - Functions
-    
     func updateViews() {
         guard let event = event else {return}
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let date = dateFormatter.date(from: event.date)
         eventTitleLable.text = event.title
         eventVenueLabel.text = event.venue.name
-        eventDateLabel.text = event.date
-        
-        
-        
+        eventDateLabel.text = date?.formatToString()
+    }
+    
+    override func prepareForReuse() {
         
         
     }

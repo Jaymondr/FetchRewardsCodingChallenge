@@ -18,6 +18,7 @@
 		67C9FA0626A65182009140E8 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0526A65182009140E8 /* EventController.swift */; };
 		67C9FA0926A65389009140E8 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0826A65389009140E8 /* EventError.swift */; };
 		67D89F8026A73DAE0001B3E3 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */; };
+		67D89F8326A781E70001B3E3 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F8226A781E70001B3E3 /* DateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		67C9FA0526A65182009140E8 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		67C9FA0826A65389009140E8 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
 		67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		67D89F8226A781E70001B3E3 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				67C9F9F426A628A0009140E8 /* Models */,
 				67C9F9F626A628BC009140E8 /* Controllers */,
 				67C9F9F526A628B2009140E8 /* Views */,
+				67C9FA0726A6536C009140E8 /* Helper and Extension */,
 				67C9F9F326A62895009140E8 /* Resources */,
 			);
 			path = "SeatGeek-CodingChallenge";
@@ -77,7 +80,6 @@
 		67C9F9F326A62895009140E8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				67C9FA0726A6536C009140E8 /* Helper and Extension */,
 				67C9F9DF26A62816009140E8 /* AppDelegate.swift */,
 				67C9F9E126A62816009140E8 /* SceneDelegate.swift */,
 				67C9F9E826A62817009140E8 /* Assets.xcassets */,
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				67C9FA0826A65389009140E8 /* EventError.swift */,
+				67D89F8226A781E70001B3E3 /* DateFormatter.swift */,
 			);
 			path = "Helper and Extension";
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D89F8326A781E70001B3E3 /* DateFormatter.swift in Sources */,
 				67C9FA0426A646C0009140E8 /* EventTableViewCell.swift in Sources */,
 				67C9F9E026A62816009140E8 /* AppDelegate.swift in Sources */,
 				67C9FA0226A64684009140E8 /* EventListTableViewController.swift in Sources */,

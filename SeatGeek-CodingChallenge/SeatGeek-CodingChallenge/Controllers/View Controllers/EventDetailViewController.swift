@@ -9,21 +9,37 @@ import UIKit
 
 class EventDetailViewController: UIViewController {
 
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventImageView: UIImageView!
+    @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventLocationLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateViews()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - Actions
+    @IBAction func seatGeekLink(_ sender: Any) {
+        if let url = URL(string: "https://seatgeek.com") {
+            UIApplication.shared.open(url)
+        }
     }
-    */
+    
+    
+    
+    
+    //MARK: - Properties
+    
+    var event: EventsData?
+    
+    //MARK: - Functions
+    func updateViews() {
+        guard let event = event else {return}
+        eventTitleLabel.text = event.title
+        eventDateLabel.text = event.date
+        eventLocationLabel.text = event.venue.location
+    }
+} //End of class
 
-}
+

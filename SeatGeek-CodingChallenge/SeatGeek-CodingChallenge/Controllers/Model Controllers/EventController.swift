@@ -17,20 +17,23 @@ class EventController {
     let events: [EventsData] = []
     
     //MARK: - String Constants
-    static let baseURL = URL(string: "https://api.seatgeek.com/2/")
-    static let client_id = "&client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
-//    static let performers = "performers"
-//    static let venues = "venues"
-    static let event = "event?"
-    static let query = "q="
-    static let imageURL = "https://seatgeek.com/images/performers-landscape/"
-    //searchTerm: String, ** insert below after tests*8
-    static func fetchEvents(completion: @escaping (Result<[EventsData], EventError>) -> Void) {
+    static let baseURL = URL(string: "https://api.seatgeek.com/2/events")
+    static let clientQuery = "client_id"
+    static let idQuery = "MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
+    static let query = "q"
+    
+    
+    static func fetchEvents(searchTerm: String, completion: @escaping (Result<[EventsData], EventError>) -> Void) {
+
+        guard let baseURL = baseURL else {return completion(.failure(.invalidURL))}
         
-        //Construct URL
-        let baseURLL = URL(string: "https://api.seatgeek.com/2/events?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy&q=football")
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        let idQueryItem = URLQueryItem(name: clientQuery, value: idQuery)
+        let eventSearchQuery = URLQueryItem(name: query, value: searchTerm)
         
-        guard let finalURL = baseURLL else {return completion(.failure(.invalidURL))}
+        components?.queryItems = [idQueryItem, eventSearchQuery]
+        
+        guard let finalURL = components?.url else {return completion(.failure(.invalidURL))}
         print("Final URL: \(finalURL)")
         //Data task
         URLSession.shared.dataTask(with: finalURL) { data, response, error in
@@ -50,18 +53,7 @@ class EventController {
             //Decode Data
             do {
                 let eventTopLevelObject = try JSONDecoder().decode(EventTopLevelObject.self, from: data)
-                
-//                var arrayOfEvent = events
-                
-                for eventData in eventTopLevelObject.events {
-                    
-//                    self.events.append(eventData)
-                    print(eventData.title)
-                    
-                    for performer in eventData.performers {
-                        print(performer.image)
-                    }
-                }
+
                 completion(.success(eventTopLevelObject.events))
         
             } catch {
@@ -70,4 +62,54 @@ class EventController {
 
         }.resume()
     }
-}
+    
+//    static func fetchEventImage(for event: EventsData, completion: @escaping (Result<UIImage, EventError>) -> Void) {
+//        
+//        let url = event.performers// else {return completion(.failure(.invalidURL))}
+//        
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            
+//            if let error = error {
+//                return completion(.failure(.thrownError(error)))
+//            }
+//            
+//            if let response = response as? HTTPURLResponse {
+//                print("SPRITE STATUS CODE: \(response.statusCode)")
+//            }
+//            
+//            guard let data = data else {return completion(.failure(.noData))}
+//            
+//            guard let image = UIImage(data: data) else {return completion(.failure(.unableToDecode))}
+//            
+//            completion(.success(image))
+//        }.resume()
+//    }
+//    
+    
+    
+    
+    
+//    static func fetchEventImage(image: Performers, completion: @escaping (Result<UIImage, EventError>) -> Void) {
+//
+//        guard let imageURL = image.image else {return completion(.failure(.invalidURL))}
+//        print(imageURL)
+//
+//        let finalURL = imageURL //JWR
+//        print(finalURL)
+//
+//
+//        URLSession.shared.dataTask(with: finalURL) { data, response, error in
+//            if let error = error {
+//                completion(.failure(.thrownError(error)))
+//            }
+//            if let response = response as? HTTPURLResponse{
+//                print("Poster status code: \(response.statusCode)")
+//            }
+//            guard let data = data else {return completion(.failure(.noData))}
+//            guard let image = UIImage(data: data) else {return completion(.failure(.unableToDecode))}
+//            completion(.success(image))
+//
+//        }.resume()
+//    }
+}//End of class
+

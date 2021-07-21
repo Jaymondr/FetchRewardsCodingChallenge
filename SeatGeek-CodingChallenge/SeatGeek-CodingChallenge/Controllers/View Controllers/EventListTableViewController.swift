@@ -8,12 +8,17 @@
 import UIKit
 
 class EventListTableViewController: UITableViewController {
+    
+    //MARK: - Outlets
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateTableView()
-
+//        updateTableView()
+        searchBar.delegate = self
 
     }
     //MARK: - Properties
@@ -23,21 +28,21 @@ class EventListTableViewController: UITableViewController {
     
     //MARK: - Functions
     //searchTerm: String() insert after testing
-    func updateTableView() {
-        EventController.fetchEvents() { (result) in //JWR searchTerm string?
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let events):
-                    self.events = events
-                    self.tableView.reloadData()
-                case .failure(let error):
-                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-
-                }
-            }
-        }
-    }
-    
+//    func updateTableView() {
+//        EventController.fetchEvents() { (result) in //JWR searchTerm string?
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let events):
+//                    self.events = events
+//                    self.tableView.reloadData()
+//                case .failure(let error):
+//                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+//
+//                }
+//            }
+//        }
+//    }
+//
     
     
     
@@ -58,7 +63,12 @@ class EventListTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if segue.identifier == "toDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? EventDetailViewController else {return}
+            let event = events[indexPath.row]
+            destinationVC.event = event
+        }
 
 
     }
@@ -66,9 +76,19 @@ class EventListTableViewController: UITableViewController {
 extension EventListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        //Reference pokedex for search functionality
-        // drag out outlet
-        //create empty array of events then save the liked event to that source
-        //create like button switched default false
+        guard let searchTerm = searchBar.text,
+              !searchTerm.isEmpty else {return}
+        EventController.fetchEvents(searchTerm: searchTerm.lowercased()) { (result) in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let event):
+                    self.events = event //New SOT
+                    self.tableView.reloadData() //updating the table view after updating the source of truth
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
     }
 }
