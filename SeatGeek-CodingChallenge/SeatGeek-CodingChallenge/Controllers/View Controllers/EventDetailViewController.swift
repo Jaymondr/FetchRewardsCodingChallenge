@@ -9,6 +9,7 @@ import UIKit
 
 class EventDetailViewController: UIViewController {
 
+    @IBOutlet weak var getTicketsButton: UIButton!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var eventDateLabel: UILabel!
@@ -26,6 +27,14 @@ class EventDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func getTicketsButtonTapped(_ sender: Any) {
+        
+        if let url = URL(string: event?.url ?? "") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    
     
     
     
@@ -36,9 +45,14 @@ class EventDetailViewController: UIViewController {
     //MARK: - Functions
     func updateViews() {
         guard let event = event else {return}
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let date = dateFormatter.date(from: event.date)
+
         eventTitleLabel.text = event.title
-        eventDateLabel.text = event.date
+        eventDateLabel.text = date?.formatToString()
         eventLocationLabel.text = event.venue.location
+        getTicketsButton.layer.cornerRadius = 10
     }
 } //End of class
 

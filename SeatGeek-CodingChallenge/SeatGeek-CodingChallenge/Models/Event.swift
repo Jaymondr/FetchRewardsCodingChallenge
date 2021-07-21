@@ -30,13 +30,15 @@ struct EventsData: Codable {
     let date: String
     let venue: Venue
     let performers: [Performers]
+    let url: String
     
     enum CodingKeys: String, CodingKey {
         case title = "title"
         case dateTBD = "date_tbd"
-        case date = "datetime_utc"
+        case date = "datetime_local"//"datetime_utc"
         case venue = "venue"
         case performers = "performers"
+        case url = "url"
     }
 }
 
@@ -44,7 +46,7 @@ struct Venue: Codable {
     let name: String
     let address: String
     let location: String
-    let url: URL
+    let url: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"

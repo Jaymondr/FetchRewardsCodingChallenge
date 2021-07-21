@@ -26,26 +26,6 @@ class EventListTableViewController: UITableViewController {
     var event: EventsData?
 
     
-    //MARK: - Functions
-    //searchTerm: String() insert after testing
-//    func updateTableView() {
-//        EventController.fetchEvents() { (result) in //JWR searchTerm string?
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let events):
-//                    self.events = events
-//                    self.tableView.reloadData()
-//                case .failure(let error):
-//                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-//
-//                }
-//            }
-//        }
-//    }
-//
-    
-    
-    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count //JWR possibly just chagne this to events.count
@@ -72,6 +52,10 @@ class EventListTableViewController: UITableViewController {
 
 
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
 }
 extension EventListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -79,7 +63,6 @@ extension EventListTableViewController: UISearchBarDelegate {
         guard let searchTerm = searchBar.text,
               !searchTerm.isEmpty else {return}
         EventController.fetchEvents(searchTerm: searchTerm.lowercased()) { (result) in
-            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let event):
