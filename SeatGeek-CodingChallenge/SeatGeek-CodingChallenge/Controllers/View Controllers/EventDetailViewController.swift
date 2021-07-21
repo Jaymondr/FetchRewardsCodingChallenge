@@ -45,6 +45,18 @@ class EventDetailViewController: UIViewController {
     //MARK: - Functions
     func updateViews() {
         guard let event = event else {return}
+        EventController.fetchEventImage(for: event) { result in
+            DispatchQueue.main.async {
+                
+                switch result {
+                
+                case .success(let image):
+                    self.eventImageView.image = image
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let date = dateFormatter.date(from: event.date)
@@ -53,6 +65,7 @@ class EventDetailViewController: UIViewController {
         eventDateLabel.text = date?.formatToString()
         eventLocationLabel.text = event.venue.location
         getTicketsButton.layer.cornerRadius = 10
+        eventImageView.layer.cornerRadius = 10
     }
 } //End of class
 

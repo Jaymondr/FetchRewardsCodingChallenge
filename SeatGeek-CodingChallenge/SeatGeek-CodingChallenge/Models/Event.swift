@@ -17,7 +17,7 @@ import Foundation
 Base URL: w/Client ID
  https://api.seatgeek.com/2/events?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy
  
-
+PAGINTION
  */
 
 struct EventTopLevelObject: Codable {
@@ -46,13 +46,11 @@ struct Venue: Codable {
     let name: String
     let address: String
     let location: String
-    let url: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case address = "address"
         case location = "display_location"
-        case url = "url"
     }
 }
 struct Performers: Codable {

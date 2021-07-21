@@ -63,28 +63,29 @@ class EventController {
         }.resume()
     }
     
-//    static func fetchEventImage(for event: EventsData, completion: @escaping (Result<UIImage, EventError>) -> Void) {
-//        
-//        let url = event.performers// else {return completion(.failure(.invalidURL))}
-//        
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            
-//            if let error = error {
-//                return completion(.failure(.thrownError(error)))
-//            }
-//            
-//            if let response = response as? HTTPURLResponse {
-//                print("SPRITE STATUS CODE: \(response.statusCode)")
-//            }
-//            
-//            guard let data = data else {return completion(.failure(.noData))}
-//            
-//            guard let image = UIImage(data: data) else {return completion(.failure(.unableToDecode))}
-//            
-//            completion(.success(image))
-//        }.resume()
-//    }
-//    
+    static func fetchEventImage(for event: EventsData, completion: @escaping (Result<UIImage, EventError>) -> Void) {
+        
+    
+        guard let url = event.performers.first!.image else {return completion(.failure(.invalidURL))}
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                return completion(.failure(.thrownError(error)))
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                print("SPRITE STATUS CODE: \(response.statusCode)")
+            }
+            
+            guard let data = data else {return completion(.failure(.noData))}
+            
+            guard let image = UIImage(data: data) else {return completion(.failure(.unableToDecode))}
+            
+            completion(.success(image))
+        }.resume()
+    }
+    
     
     
     

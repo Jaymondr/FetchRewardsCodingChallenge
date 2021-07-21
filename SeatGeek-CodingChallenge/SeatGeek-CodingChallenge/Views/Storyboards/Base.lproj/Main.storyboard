@@ -70,7 +70,7 @@
                                             </constraints>
                                             <color key="tintColor" red="0.62641197739999999" green="0.2049239719" blue="0.16381312919999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <state key="normal">
-                                                <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                                <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                             </state>
                                         </button>
@@ -274,6 +274,7 @@
     <resources>
         <image name="blueLogo" width="51" height="9.5"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

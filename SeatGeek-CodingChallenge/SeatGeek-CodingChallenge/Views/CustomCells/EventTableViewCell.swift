@@ -25,7 +25,20 @@ class EventTableViewCell: UITableViewCell {
 
     //MARK: - Functions
     func updateViews() {
+        
         guard let event = event else {return}
+        EventController.fetchEventImage(for: event) { result in
+            DispatchQueue.main.async {
+                
+                switch result {
+                
+                case .success(let image):
+                    self.eventImageView.image = image
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -33,6 +46,7 @@ class EventTableViewCell: UITableViewCell {
         eventTitleLable.text = event.title
         eventVenueLabel.text = event.venue.name
         eventDateLabel.text = date?.formatToString()
+        eventImageView.layer.cornerRadius = 10
     }
     
     override func prepareForReuse() {
@@ -40,3 +54,6 @@ class EventTableViewCell: UITableViewCell {
         
     }
 }//End of class
+
+
+
