@@ -15,7 +15,6 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    
     //MARK: - Properties
     var event: EventsData? {
         didSet {
@@ -27,9 +26,6 @@ class EventTableViewCell: UITableViewCell {
         didSet {
             checkIsFavorited()
         }
-//        willSet {
-//            checkIsFavorited()
-//        }
     }
     
     var performer: Performers?
@@ -49,7 +45,6 @@ class EventTableViewCell: UITableViewCell {
         guard let event = event else {return}
         EventController.fetchEventImage(for: event) { result in
             DispatchQueue.main.async {
-                EventController.shared.loadFromPersistenceStore()
                 if Favorites.shared.contains(event) {
                     self.isFavoriteButton.isHidden = false
                 
@@ -77,9 +72,6 @@ class EventTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
         self.layer.cornerRadius = 10
         eventVenueLabel.textColor = UIColor(named: "background")
-    }
-    
-    override func prepareForReuse() {
     }
 }//End of class
 

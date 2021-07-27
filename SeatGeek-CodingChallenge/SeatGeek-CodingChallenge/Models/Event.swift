@@ -10,14 +10,11 @@ import Foundation
 
 /* URLS
  
- App Secret: 608482dbb513d8ffeba9aa4b94304537273696761303af26c7fcef80fce37dd3
- 
  Client ID: client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy
  
 Base URL: w/Client ID
  https://api.seatgeek.com/2/events?client_id=MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy
  
-PAGINTION
  */
 
 struct Events: Codable {
@@ -68,5 +65,3 @@ struct Location: Codable {
     let lat: Float
     let lon: Float
 }
-
-

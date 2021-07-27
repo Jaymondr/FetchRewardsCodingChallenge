@@ -72,7 +72,7 @@ class EventController {
             }
             
             if let response = response as? HTTPURLResponse {
-                print("Image STATUS CODE: \(response.statusCode)")
+//                print("Image STATUS CODE: \(response.statusCode)")
             }
             
             guard let data = data else {return completion(.failure(.noData))}
@@ -81,32 +81,6 @@ class EventController {
             
             completion(.success(image))
         }.resume()
-    }
-    //MARK: - Persistence
-    // CSL: create, Save, Load
-    func createPersistenceStore() -> URL {
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let fileURL = url[0].appendingPathComponent("SeatGeek-CodingChallenge.json")
-        return fileURL
-    }
-    
-    func saveToPersistenceStore() {
-        do {
-            let data = try JSONEncoder().encode(events)
-            try data.write(to: createPersistenceStore())
-        } catch {
-            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-            
-        }
-    }
-    
-    func loadFromPersistenceStore () {
-        do {
-            let data = try Data(contentsOf: createPersistenceStore())
-            events = try JSONDecoder().decode([Events].self, from: data)
-        } catch {
-            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-        }
     }
 }//End of class
 

@@ -14,6 +14,7 @@ class EventListTableViewController: UITableViewController {
     //MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        Favorites.shared.loadFromPersistenceStore()
         searchBar.delegate = self
         hideKeyboard()
         updateViews()
@@ -21,15 +22,15 @@ class EventListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
+        Favorites.shared.loadFromPersistenceStore()
         self.tableView.reloadData()
     }
     //MARK: - Properties
     var events: [EventsData] = []
-    var event: EventsData?
-    
+
     //MARK: - Functions
     func updateViews() {
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "background")            
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "background")
     }
     
     func hideKeyboard() {
@@ -40,6 +41,7 @@ class EventListTableViewController: UITableViewController {
             tap.cancelsTouchesInView = false
         }
     }
+    
     @objc func hideKeyboardByTappingOutside() {
         self.view.endEditing(true)
     }
@@ -59,7 +61,6 @@ class EventListTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
@@ -92,5 +93,5 @@ extension EventListTableViewController: UISearchBarDelegate {
         }
         self.searchBar.backgroundColor = UIColor(named: "background")
     }
-} //End of class
+} //End of extension
 
