@@ -19,6 +19,7 @@
 		67C9FA0926A65389009140E8 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C9FA0826A65389009140E8 /* EventError.swift */; };
 		67D89F8026A73DAE0001B3E3 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */; };
 		67D89F8326A781E70001B3E3 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F8226A781E70001B3E3 /* DateFormatter.swift */; };
+		67D89F8D26A9EBA30001B3E3 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D89F8C26A9EBA30001B3E3 /* Favorites.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		67C9FA0826A65389009140E8 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
 		67D89F7F26A73DAE0001B3E3 /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		67D89F8226A781E70001B3E3 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		67D89F8C26A9EBA30001B3E3 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				67C9F9FC26A62C2D009140E8 /* Event.swift */,
+				67D89F8C26A9EBA30001B3E3 /* Favorites.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				67C9F9E026A62816009140E8 /* AppDelegate.swift in Sources */,
 				67C9FA0226A64684009140E8 /* EventListTableViewController.swift in Sources */,
 				67C9F9FD26A62C2D009140E8 /* Event.swift in Sources */,
+				67D89F8D26A9EBA30001B3E3 /* Favorites.swift in Sources */,
 				67C9F9E226A62816009140E8 /* SceneDelegate.swift in Sources */,
 				67C9FA0626A65182009140E8 /* EventController.swift in Sources */,
 				67D89F8026A73DAE0001B3E3 /* EventDetailViewController.swift in Sources */,
