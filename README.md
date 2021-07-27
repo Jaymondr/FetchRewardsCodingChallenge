@@ -30,7 +30,7 @@ BUTTONS
 
 I also added alert controllers to notify the user that they are going to be directed to another page on the maps and tickets buttons.
 
-Favorites
+FAVORITES
 When the heart shaped favorites button is tapped, a heart will also appear on the cell in the table view. 
 Favorites are saved to file manager, using JSON persistence so the app will still show favorites when it is closed and re-opened.
 
