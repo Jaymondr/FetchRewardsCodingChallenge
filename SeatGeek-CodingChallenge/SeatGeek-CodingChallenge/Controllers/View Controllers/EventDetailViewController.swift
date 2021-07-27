@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class EventDetailViewController: UIViewController {
 
@@ -14,13 +15,41 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var mapsButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+        checkFavStatus()
+
+    }
+        
+    //MARK: - Actions
+    @IBAction func mapsButtonTapped(_ sender: Any) {
+        guard let event = event else {return}
+        
+        let coordinate = event.venue.coordinates
+        
+        let areaLat = coordinate.lat
+        let areaLon = coordinate.lon
+        let area = "\(areaLat),\(areaLon)"
+        let mapsURL = "http://maps.apple.com/?q="
+        let finalURL = "\(mapsURL)\(area)"
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"http://maps.apple.com")!)) {
+            UIApplication.shared.open(URL(string: "\(finalURL)")!)
+            print(finalURL)
+            
+        } else {
+            NSLog("Can't use Apple Maps");
+        }
+
+        
     }
     
-    //MARK: - Actions
     @IBAction func seatGeekLink(_ sender: Any) {
         if let url = URL(string: "https://seatgeek.com") {
             UIApplication.shared.open(url)
@@ -34,6 +63,18 @@ class EventDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func likeButtonTapped(_ sender: Any) {
+        guard let event = event else {return}
+        
+        if Favorites.shared.contains(event) {
+            likeButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            Favorites.shared.remove(event)
+
+        } else {
+            Favorites.shared.add(event)
+            likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+            }
     
     
     
@@ -41,7 +82,7 @@ class EventDetailViewController: UIViewController {
     //MARK: - Properties
     
     var event: EventsData?
-    
+    var liked: Bool = false
     //MARK: - Functions
     func updateViews() {
         guard let event = event else {return}
@@ -66,7 +107,18 @@ class EventDetailViewController: UIViewController {
         eventLocationLabel.text = event.venue.location
         getTicketsButton.layer.cornerRadius = 10
         eventImageView.layer.cornerRadius = 10
+        mapsButton.layer.cornerRadius = 10
     }
+    
+    func checkFavStatus() {
+        guard let event = event else {return}
+        EventController.shared.loadFromPersistenceStore()
+        if Favorites.shared.contains(event) {
+            likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
+    
+    
 } //End of class
 
 

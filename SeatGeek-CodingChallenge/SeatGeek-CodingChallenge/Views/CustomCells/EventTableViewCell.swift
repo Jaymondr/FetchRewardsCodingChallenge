@@ -13,6 +13,8 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventVenueLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var eventImageView: UIImageView!
+    @IBOutlet weak var isFavoriteButton: UIButton!
+    
     
     //MARK: - Properties
     var event: EventsData? {
@@ -21,19 +23,45 @@ class EventTableViewCell: UITableViewCell {
         }
     }
     
+    var favorite: Favorites? {
+        didSet {
+            checkIsFavorited()
+        }
+//        willSet {
+//            checkIsFavorited()
+//        }
+    }
+    
     var performer: Performers?
 
     //MARK: - Functions
+    func checkIsFavorited() {
+        guard let event = event else {return}
+        if Favorites.shared.contains(event) {
+            isFavoriteButton.isHidden = false
+        
+        } else {
+            isFavoriteButton.isHidden = true
+        }
+    }
     func updateViews() {
         
         guard let event = event else {return}
         EventController.fetchEventImage(for: event) { result in
             DispatchQueue.main.async {
+                EventController.shared.loadFromPersistenceStore()
+                if Favorites.shared.contains(event) {
+                    self.isFavoriteButton.isHidden = false
                 
+                } else {
+                    self.isFavoriteButton.isHidden = true
+                }
                 switch result {
                 
                 case .success(let image):
                     self.eventImageView.image = image
+                    self.eventImageView.layer.cornerRadius = 10
+
                 case .failure(let error):
                     print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 }
@@ -46,12 +74,12 @@ class EventTableViewCell: UITableViewCell {
         eventTitleLable.text = event.title
         eventVenueLabel.text = event.venue.name
         eventDateLabel.text = date?.formatToString()
-        eventImageView.layer.cornerRadius = 10
+        self.backgroundColor = .clear
+        self.layer.cornerRadius = 10
+        eventVenueLabel.textColor = UIColor(named: "background")
     }
     
     override func prepareForReuse() {
-        
-        
     }
 }//End of class
 

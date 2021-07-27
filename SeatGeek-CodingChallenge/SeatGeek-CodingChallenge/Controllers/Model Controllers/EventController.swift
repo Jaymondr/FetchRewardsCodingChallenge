@@ -14,21 +14,20 @@ class EventController {
     
     static let shared = EventController()
     
-    let events: [EventsData] = []
-    
+    var events: [Events] = []
+        
     //MARK: - String Constants
     static let baseURL = URL(string: "https://api.seatgeek.com/2/events")
-    static let clientQuery = "client_id"
-    static let idQuery = "MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
+    static let clientKey = "client_id"
+    static let idValue = "MjI1ODUzNDN8MTYyNjczMTU5NS40NTkyOTEy"
     static let query = "q"
-    
     
     static func fetchEvents(searchTerm: String, completion: @escaping (Result<[EventsData], EventError>) -> Void) {
 
         guard let baseURL = baseURL else {return completion(.failure(.invalidURL))}
         
         var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        let idQueryItem = URLQueryItem(name: clientQuery, value: idQuery)
+        let idQueryItem = URLQueryItem(name: clientKey, value: idValue)
         let eventSearchQuery = URLQueryItem(name: query, value: searchTerm)
         
         components?.queryItems = [idQueryItem, eventSearchQuery]
@@ -52,20 +51,18 @@ class EventController {
             
             //Decode Data
             do {
-                let eventTopLevelObject = try JSONDecoder().decode(EventTopLevelObject.self, from: data)
+                let eventTopLevelObject = try JSONDecoder().decode(Events.self, from: data)
 
                 completion(.success(eventTopLevelObject.events))
         
             } catch {
                 completion(.failure(.thrownError(error)))
             }
-
         }.resume()
     }
     
     static func fetchEventImage(for event: EventsData, completion: @escaping (Result<UIImage, EventError>) -> Void) {
         
-    
         guard let url = event.performers.first!.image else {return completion(.failure(.invalidURL))}
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -75,7 +72,7 @@ class EventController {
             }
             
             if let response = response as? HTTPURLResponse {
-                print("SPRITE STATUS CODE: \(response.statusCode)")
+                print("Image STATUS CODE: \(response.statusCode)")
             }
             
             guard let data = data else {return completion(.failure(.noData))}
@@ -85,32 +82,31 @@ class EventController {
             completion(.success(image))
         }.resume()
     }
+    //MARK: - Persistence
+    // CSL: create, Save, Load
+    func createPersistenceStore() -> URL {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fileURL = url[0].appendingPathComponent("SeatGeek-CodingChallenge.json")
+        return fileURL
+    }
     
+    func saveToPersistenceStore() {
+        do {
+            let data = try JSONEncoder().encode(events)
+            try data.write(to: createPersistenceStore())
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+            
+        }
+    }
     
-    
-    
-    
-//    static func fetchEventImage(image: Performers, completion: @escaping (Result<UIImage, EventError>) -> Void) {
-//
-//        guard let imageURL = image.image else {return completion(.failure(.invalidURL))}
-//        print(imageURL)
-//
-//        let finalURL = imageURL //JWR
-//        print(finalURL)
-//
-//
-//        URLSession.shared.dataTask(with: finalURL) { data, response, error in
-//            if let error = error {
-//                completion(.failure(.thrownError(error)))
-//            }
-//            if let response = response as? HTTPURLResponse{
-//                print("Poster status code: \(response.statusCode)")
-//            }
-//            guard let data = data else {return completion(.failure(.noData))}
-//            guard let image = UIImage(data: data) else {return completion(.failure(.unableToDecode))}
-//            completion(.success(image))
-//
-//        }.resume()
-//    }
+    func loadFromPersistenceStore () {
+        do {
+            let data = try Data(contentsOf: createPersistenceStore())
+            events = try JSONDecoder().decode([Events].self, from: data)
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+        }
+    }
 }//End of class
 
